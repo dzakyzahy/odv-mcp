@@ -454,14 +454,21 @@ def build_xview_xml(
             )
         lines.append('</IsoSurfaceVariables>')
 
+    if win_mode == 1:
+        lines.extend([
+            '<StationSelectionCriteria>',
+            '<Range last_station_id="250"/>',
+            '</StationSelectionCriteria>',
+        ])
+
     if title:
         lines.extend([
             '<Canvas>',
             '<GraphicsObjects>',
             '<GObject type="1" own_coordinates="F" dragging="T" clipping="F" post_data="T">',
-            f'<Annotation x_coordinate="15.0" y_coordinate="19.8" text="{_esc(title)}" '
-            'font_size="14" text_color="0" background_color="-1" frame_color="-1" '
-            'frame_width="-1" frame_type="0" angle="0" text_alignment="1"/>',
+            f'<Annotation x_coordinate="1.5" y_coordinate="20.2" text="{_esc(title)}" '
+            'font_size="12" text_color="0" background_color="-1" frame_color="-1" '
+            'frame_width="-1" frame_type="0" angle="0" text_alignment="6"/>',
             '</GObject>',
             '</GraphicsObjects>',
             '</Canvas>',
