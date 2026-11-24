@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "odv-mcp": {
+      "command": "python",
+      "args": [
+        "-m",
+        "odv_mcp",
+        "serve"
+      ],
+      "env": {
+        "ODV_EXECUTABLE": "C:\\Program Files\\Ocean Data View\\bin_w64\\odv.exe"
+      }
+    }
+  }
+}

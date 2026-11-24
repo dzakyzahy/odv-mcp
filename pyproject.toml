@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "odv-mcp"
+version = "1.0.0"
+description = "Model Context Protocol (MCP) Server & AI Automation Engine for Ocean Data View (ODV 5) and Oceanographic Data Visualization"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+    { name = "Dzaky Zahy Rabbani", email = "dzakyzr3@gmail.com" }
+]
+keywords = [
+    "mcp",
+    "model-context-protocol",
+    "ocean-data-view",
+    "odv",
+    "oceanography",
+    "diva-gridding",
+    "teos-10",
+    "wod",
+    "ctd",
+    "netcdf"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Atmospheric Science",
+    "Topic :: Scientific/Engineering :: Oceanography",
+    "Topic :: Scientific/Engineering :: Visualization"
+]
+requires-python = ">=3.9"
+dependencies = [
+    "numpy>=1.22",
+    "scipy>=1.9",
+    "pandas>=1.5",
+    "matplotlib>=3.6"
+]
+
+[project.optional-dependencies]
+teos10 = ["gsw>=3.6.16"]
+netcdf = ["netCDF4>=1.6", "xarray>=2023.1"]
+mcp-sdk = ["mcp>=1.2.0"]
+
+[project.scripts]
+odv-mcp = "odv_mcp.server:main"
+
+[project.urls]
+Homepage = "https://github.com/dzakyzahy/odv-mcp"
+Repository = "https://github.com/dzakyzahy/odv-mcp"
+Issues = "https://github.com/dzakyzahy/odv-mcp/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["odv_mcp*"]
