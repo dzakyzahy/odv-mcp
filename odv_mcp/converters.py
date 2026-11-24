@@ -327,7 +327,7 @@ def scan_odv_spreadsheet_metadata(
         "suggested_section": {
             "lons": sec_lons,
             "lats": sec_lats,
-            "width_deg": round(max(0.4, 0.25 * max(map_domain["lon_max"] - map_domain["lon_min"], map_domain["lat_max"] - map_domain["lat_min"])), 3),
+            "width_deg": 0.20,
         },
         "variable_statistics": var_stats,
         "sample_stations": stations[:15],

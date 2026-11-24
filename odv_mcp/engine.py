@@ -237,6 +237,7 @@ def import_raw_file_to_odv_collection(
     elif fmt == "WORLDOCEANDATABASE":
         cmd_lines = [
             f"create_collection {_odv_path(target_odv)}, WORLDOCEANDATABASE",
+            f"open_collection {_odv_path(target_odv)}",
             f"import_data {_odv_path(decompressed)}, WORLDOCEANDATABASE",
         ]
         if export_spreadsheet:
@@ -252,6 +253,7 @@ def import_raw_file_to_odv_collection(
     elif fmt == "NETCDF":
         cmd_lines = [
             f"create_collection {_odv_path(target_odv)}, ARGOPROFILES",
+            f"open_collection {_odv_path(target_odv)}",
             f"import_data {_odv_path(decompressed)}, ARGOPROFILES",
         ]
         if export_spreadsheet:
@@ -450,15 +452,16 @@ def create_and_render_odv_view(
         cmd_lines = [
             f"open_collection {_odv_path(batch_odv)}",
             f"load_view {_odv_path(batch_xview)}",
+            "set_axis_full_ranges -1",
+            "set_axis_full_ranges 0",
         ]
-        if x_range is None and y_range is None and z_range is None:
-            cmd_lines.append("set_axis_full_ranges -1")
-        if map_domain is None:
-            cmd_lines.append("set_axis_full_ranges 0")
         if x_range is not None:
             cmd_lines.append(f"set_axis_range 1, x, {x_range[0]}, {x_range[1]}")
         if y_range is not None:
-            cmd_lines.append(f"set_axis_range 1, y, {y_range[0]}, {y_range[1]}")
+            if resolve_plot_type_is_section(plot_type) or str(plot_type).lower() in ("station", "profile"):
+                cmd_lines.append(f"set_axis_range 1, y, {y_range[1]}, {y_range[0]}")
+            else:
+                cmd_lines.append(f"set_axis_range 1, y, {y_range[0]}, {y_range[1]}")
         if z_range is not None:
             cmd_lines.append(f"set_axis_range 1, z, {z_range[0]}, {z_range[1]}")
 

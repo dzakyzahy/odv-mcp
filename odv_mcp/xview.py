@@ -55,13 +55,13 @@ PLOT_MODES: Dict[str, int] = {
 }
 
 SECTION_COORDINATES: Dict[str, int] = {
-    "distance": 1,
-    "km": 1,
-    "lon": 2,
-    "longitude": 2,
-    "lat": 3,
-    "latitude": 3,
-    "time": 4,
+    "distance": 0,
+    "km": 0,
+    "lon": 1,
+    "longitude": 1,
+    "lat": 2,
+    "latitude": 2,
+    "time": 3,
 }
 
 POPULAR_PALETTES: List[str] = [
@@ -316,14 +316,13 @@ def build_xview_xml(
         y_nodes = sc.get("lats") or sc.get("y_nodes") or default_lats
         coord_code = resolve_section_coordinate(sc.get("coordinate", "distance"))
         sec_name = sc.get("name", "Hydrographic Section")
-        sec_width = float(sc.get("width_deg", sc.get("width", max(0.5, 0.25 * max(lon_span, lat_span)))))
-        bathy_file = sc.get("bathymetry_name", "GEBCO_2023_6x6min_Global.nc")
+        sec_width = float(sc.get("width_deg", sc.get("width", 0.25)))
 
         x_str = ",".join(f"{float(v):.5f}" for v in x_nodes)
         y_str = ",".join(f"{float(v):.5f}" for v in y_nodes)
         lines.extend([
             f'<Section coordinate="{coord_code}" section_name="{_esc(sec_name)}" '
-            f'width="{sec_width:.4f}" bathymetry_name="{_esc(bathy_file)}">',
+            f'width="{sec_width:.4f}">',
             f'<xNodes>{x_str}</xNodes>',
             f'<yNodes>{y_str}</yNodes>',
             '</Section>',
